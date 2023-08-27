@@ -6,5 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".AdminScreen">
 
+    <TextView
+        android:id="@+id/topTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="16dp"
+        android:text="Admin Dashboard"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- First Row -->
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="403dp"
+        android:layout_height="193dp"
+        android:layout_below="@+id/topTextView"
+        android:layout_marginTop="23dp"
+        android:orientation="horizontal"
+
+        android:padding="8dp">
+
+        <!-- First Button -->
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:text="Manage Doctors"
+            android:textSize="20sp"
+            app:backgroundTint="#17BFB4" /> <!-- Set your desired background color here -->
+
+        <!-- Second Button -->
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:text="Manage Patients"
+            android:textSize="20sp"
+            app:backgroundTint="#0C827A" /> <!-- Set your desired background color here -->
+    </LinearLayout>
+
+    <!-- Second Row -->
+    <!-- Second Row -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="206dp"
+        android:layout_below="@id/layout1"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Third Button -->
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="170dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:text="Manage Tracking Device"
+            android:textSize="20sp"
+            app:backgroundTint="#0C827A" />
+
+        <!-- Fourth Button -->
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="9dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:text="Manage Nurses"
+            android:textSize="20sp"
+            app:backgroundTint="#17BFB4" />
+    </LinearLayout>
+
 
 </RelativeLayout>
