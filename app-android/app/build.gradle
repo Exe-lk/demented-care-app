@@ -49,4 +49,8 @@ dependencies {
     //multi desk
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    //QR Reader Scan
+    implementation 'com.google.zxing:core: 3.4.1'
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+
 }
