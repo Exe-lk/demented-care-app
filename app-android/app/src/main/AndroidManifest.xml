@@ -32,13 +32,13 @@
             android:name=".AddDoctorScreen"
             android:exported="false" />
         <activity
-            android:name=".AddHealthTrackerDevice"
+            android:name=".LoginScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".AddHealthTrackerDevice"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
