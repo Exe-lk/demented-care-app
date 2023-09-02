@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class AdminScreen extends AppCompatActivity {
 
@@ -14,8 +15,8 @@ public class AdminScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
 
-        Button manageDoctorsButton = findViewById(R.id.button1);  // doctor button
-        Button manageNurseButton = findViewById(R.id.button4);  // nurse button
+        ImageButton manageDoctorsButton = findViewById(R.id.button);  // doctor button
+        ImageButton manageNurseButton = findViewById(R.id.button2);  // nurse button
 
         manageDoctorsButton.setOnClickListener(new View.OnClickListener() {
             @Override

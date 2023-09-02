@@ -18,7 +18,8 @@
             android:text="Add New Employee"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#7876E1"/>
 
 
         <!-- First Name -->
@@ -179,14 +180,14 @@
         <!-- Submit Button -->
         <Button
             android:id="@+id/btnSubmit"
-            android:backgroundTint="#18B7B8"
-            android:textColor="@color/black"
+            android:backgroundTint="#7876E1"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/radioGroupOptions"
             android:padding="10dp"
             android:text="submit"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"

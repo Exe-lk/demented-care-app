@@ -12,7 +12,7 @@
         app:cardElevation="8dp"
         app:cardCornerRadius="8dp"
         android:layout_margin="8dp"
-        app:cardBackgroundColor="#6ED5CB">
+        app:cardBackgroundColor="#7876E1">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Name: "
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     android:textSize="20dp"
                                     android:textStyle="bold" />
 
@@ -83,8 +83,8 @@
                                     android:layout_width="305dp"
                                     android:layout_height="match_parent"
                                     android:layout_marginStart="8dp"
-                                    android:text="Shehan Randika"
-                                    android:textColor="@color/black"
+                                    android:text="James Smith"
+                                    android:textColor="@color/white"
                                     android:textSize="20sp" />
                             </LinearLayout>
 
@@ -108,7 +108,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Email: "
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -116,8 +116,8 @@
                                     android:layout_width="246dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="agsrandika@gmail.com"
-                                    android:textColor="@color/black"
+                                    android:text="jamessmith@gmail.com"
+                                    android:textColor="@color/white"
                                     android:textSize="15sp" />
 
                             </LinearLayout>
