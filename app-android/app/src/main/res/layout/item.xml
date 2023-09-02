@@ -140,7 +140,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:backgroundTint="#010E0D"
-                        android:text="View More" />
+                        android:text="View More"
+                        android:onClick="openViewMorePage"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

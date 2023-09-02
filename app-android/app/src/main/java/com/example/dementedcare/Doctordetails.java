@@ -13,7 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.util.Log;
-
+import android.view.View;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +30,7 @@ public class Doctordetails extends AppCompatActivity {
     MyAdapter myAdapter;    // MyAdapter class
     FirebaseFirestore db;    // Database
     ProgressDialog progressDialog; //progress bar
+    String Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,16 @@ public class Doctordetails extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         userArrayList = new ArrayList<>();
         myAdapter = new MyAdapter(this, userArrayList);
-
+        Email = getIntent().getStringExtra("email");
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(data doctor) {
                 openDoctorDetailsActivity(doctor);
+            }
+
+            @Override
+            public void onItemClick(String userId) {
+
             }
         });
 
@@ -96,6 +102,13 @@ public class Doctordetails extends AppCompatActivity {
                     }
                 });
     }
+    public void openViewMorePage(View view) {
+        Intent intent = new Intent(this, ViewMoreActivity.class);
+        intent.putExtra("email", Email); // Pass the userId to ViewMoreActivity
+        startActivity(intent);
+    }
+
+
     //        end code
 }
 

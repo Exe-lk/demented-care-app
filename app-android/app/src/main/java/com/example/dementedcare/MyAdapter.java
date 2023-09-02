@@ -43,11 +43,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             holder.itemView.setOnClickListener(view -> {
                 if (itemClickListener != null) {
-                    itemClickListener.onItemClick(data);
+                    // Pass userId to onItemClick
+                    itemClickListener.onItemClick(data.getEmail());
                 }
             });
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -56,6 +58,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(data data);
+
+        void onItemClick(String email);
+
+
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
