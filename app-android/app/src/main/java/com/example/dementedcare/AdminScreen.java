@@ -17,6 +17,7 @@ public class AdminScreen extends AppCompatActivity {
 
         ImageButton manageDoctorsButton = findViewById(R.id.button);  // doctor button
         ImageButton manageNurseButton = findViewById(R.id.button2);  // nurse button
+        ImageButton TrackingButton = findViewById(R.id.trackingdevice);  // nurse button
 
         manageDoctorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,14 +32,24 @@ public class AdminScreen extends AppCompatActivity {
                 openManageNurseScreen();
             }
         });
+        TrackingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAddHealthTrackerDevice();
+            }
+        });
     }
     private void openAddDoctorScreen() {
-        Intent intent = new Intent(this, AddDoctorScreen.class);
+        Intent intent = new Intent(this, Doctordetails.class);
         startActivity(intent);
     }
 
     private void openManageNurseScreen() {
         Intent intent = new Intent(this,AddDoctorScreen.class);
+        startActivity(intent);
+    }
+    private void openAddHealthTrackerDevice() {
+        Intent intent = new Intent(this,AddHealthTrackerDevice.class);
         startActivity(intent);
     }
 }

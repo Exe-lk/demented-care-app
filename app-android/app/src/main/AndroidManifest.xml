@@ -6,6 +6,11 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DementedCare"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashScreen"
+            android:exported="false" />
+        <activity
+            android:name="Restriedarea"
+            android:exported="false" />
+        <activity
+            android:name=".Chatbot"
+            android:exported="false" />
         <activity
             android:name=".predictform"
             android:exported="false" />
@@ -41,7 +55,7 @@
             android:name=".NurseScreen"
             android:exported="false" />
         <activity
-            android:name=".DoctorScreen"
+            android:name="DoctorScreen"
             android:exported="false" />
         <activity
             android:name=".AddDoctorScreen"
@@ -53,7 +67,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Chatbot"
+            android:name=".patientsimotionscheck"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
