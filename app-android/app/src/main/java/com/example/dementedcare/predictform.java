@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.util.Log; // Import Log for logging
 import android.widget.Toast; // Import Toast for displaying error messages
 
+import com.example.dementedcare.model.HelthForm;
+
+
 public class predictform extends AppCompatActivity {
 
     @Override
@@ -108,8 +111,11 @@ public class predictform extends AppCompatActivity {
                     Log.d("User Input", "Chl: " + chl);
                     // ... Log other input data
 
+
+
                     // Create an intent to start the new activity
                     Intent intent = new Intent(predictform.this, AIPredictionActivity.class);
+
 
                     // Add the user input data as extras to the intent
                     intent.putExtra("Age", age);
@@ -125,6 +131,7 @@ public class predictform extends AppCompatActivity {
                     Toast.makeText(predictform.this, "Invalid input. Please check your input values.", Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
 
         // OnClickListener for the Cancel button
