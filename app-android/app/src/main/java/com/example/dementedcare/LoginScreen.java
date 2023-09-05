@@ -125,7 +125,7 @@ public class LoginScreen extends AppCompatActivity {
             intent = new Intent(LoginScreen.this, DoctorScreen.class);
         } else if (userRole.equals(" Nurse")) {
             // If the user is a Nurse, open NurseHome activity
-            intent = new Intent(LoginScreen.this, NurseScreen.class);
+            intent = new Intent(LoginScreen.this, DoctorScreen.class);
         } else if (userRole.equals(" Admin")) {
             // If the user is an Admin, open MainActivity (or the appropriate admin activity)
             intent = new Intent(LoginScreen.this, AdminScreen.class);

@@ -1,29 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/main_header_selector"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/recordButton"
-        android:layout_width="159dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Record" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="158dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recordButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Play" />
+    </LinearLayout>
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="211dp"
+        app:srcCompat="@drawable/record_img" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="343dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="100dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/start_rec_btn"
+            android:layout_width="40dp"
+            android:layout_height="113dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/rec_mic_img_1" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="2dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/rec_play_img_btn" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:orientation="horizontal"
+        android:layout_gravity="">
+
+        <ImageButton
+            android:id="@+id/submit_btn"
+            android:layout_width="40dp"
+            android:layout_height="84dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/rec_submit_img_btn" />
 
 
-
+    </LinearLayout>
+</LinearLayout>

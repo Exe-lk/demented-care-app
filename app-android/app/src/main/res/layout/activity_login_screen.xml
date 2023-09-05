@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginScreen"
-    android:background="#6750A3">
+    android:background="#7876E1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,6 +59,7 @@
                 android:layout_marginStart="90dp"
                 android:background="@drawable/edittext_border"
                 android:hint="Enter Your Email Address "
+                android:textColor="@color/black"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:textColorHint="#7876DC" />
@@ -72,6 +73,7 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/edittext_border"
                 android:hint="Password"
+                android:textColor="@color/black"
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColorHint="#7876DC" />
@@ -86,6 +88,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/log_btn_background"
                 android:text="Sign in"
+                app:backgroundTint="#7876E1"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"

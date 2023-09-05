@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Solid Background Color -->
+
+
+    <!-- Image on top of the background -->
+    <item android:drawable="@drawable/rec_submit_btn_img" />
+</layer-list>
