@@ -23,7 +23,7 @@
         android:theme="@style/Theme.DementedCare"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreen"
+            android:name=".voicerecorder"
             android:exported="false" />
         <activity
             android:name="Restriedarea"
@@ -71,7 +71,7 @@
             android:name=".patientsimotionscheck"
             android:exported="false" />
         <activity
-            android:name=".voicerecorder"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
