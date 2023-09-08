@@ -47,28 +47,31 @@ public class AddHealthTrackerDevice extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
             String contents = intentResult.getContents();
             if (contents != null) {
                 textview.setText(contents);
 
                 // Initialize Firebase Realtime Database reference
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("scanned_qr_codes");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("gps_tracking_devices");
 
-                // Push the scanned content to the database
-                String key = databaseReference.push().getKey();
-                databaseReference.child(key).setValue(contents);
+                // Create a new child node under 'gps_tracking_devices' with a unique key
+                DatabaseReference newDeviceRef = databaseReference.push();
 
-
+                // Set the values for the fields
+                newDeviceRef.child("gps_device_id").setValue(contents);
+                newDeviceRef.child("userId").setValue("empty");
+                newDeviceRef.child("longitude").setValue("empty");
+                newDeviceRef.child("latitude").setValue("empty");
 
                 showPopupMessage("QR Code Scanned and Stored", "Scanned content: " + contents);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-
     }
+
     private void showPopupMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)
