@@ -50,6 +50,28 @@
                     android:backgroundTint="#7876E2"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="70dp"
+                        android:background="#7876E1">
+
+                        <EditText
+                            android:id="@+id/nicNumberEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edittext_border"
+                            android:hint="Pleace enter patient NIC number"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:textColor="#7876E1"
+                            android:textColorHint="@color/black"
+                            />
+
+
+                    </LinearLayout>
 
                     />
 
@@ -273,9 +295,7 @@
                     
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        >
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/aibtn"
                             android:layout_width="360dp"
@@ -284,7 +304,6 @@
                             android:layout_marginBottom="36dp"
                             android:layout_marginStart="18dp"
                             android:layout_marginEnd="25dp"
-
                             android:background="@drawable/delete_btn"
                             android:clickable="true"
                             android:focusable="true"
@@ -297,6 +316,35 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
                     </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <Button
+                            android:id="@+id/addDataButton"
+                            android:layout_width="360dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/btnSubmit"
+                            android:layout_marginBottom="36dp"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginEnd="25dp"
+                            android:background="@drawable/delete_btn"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="10dp"
+                            android:text="Save Data"
+                            app:backgroundTint="#2A454E"
+                            android:textColor="@color/white"
+                            android:drawableTint="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </LinearLayout>
+
 
 
 

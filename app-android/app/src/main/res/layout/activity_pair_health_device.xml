@@ -18,12 +18,12 @@
 <!--        tools:layout_editor_absoluteX="99dp"-->
 <!--        tools:layout_editor_absoluteY="287dp" />-->
 
-<!--    <Button-->
-<!--        android:id="@+id/submit"-->
-<!--        android:layout_width="211dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button"-->
-<!--        android:layout_marginTop="60dp"/>-->
+    <Button
+        android:id="@+id/scanQRButton"
+        android:layout_width="211dp"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_marginTop="60dp"/>
 
     <TextView
         android:id="@+id/deviceIdTextView"

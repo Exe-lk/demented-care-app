@@ -25,7 +25,7 @@
         android:theme="@style/Theme.DementedCare"
         tools:targetApi="31">
         <activity
-            android:name=".connent_health_device"
+            android:name=".pair_health_device"
             android:exported="false" />
         <activity
             android:name=".Open_activity"
@@ -60,7 +60,7 @@
             android:name=".predictform"
             android:exported="false" />
         <activity
-            android:name=".PatientHealthDetails"
+            android:name=".connent_health_device"
             android:exported="false" />
         <activity
             android:name=".AIPredictionActivity"
@@ -96,7 +96,7 @@
             android:name=".patientsimotionscheck"
             android:exported="false" />
         <activity
-            android:name=".pair_health_device"
+            android:name=".PatientHealthDetails"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
