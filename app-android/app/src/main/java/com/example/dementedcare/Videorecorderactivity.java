@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,8 +76,16 @@ public class Videorecorderactivity extends AppCompatActivity {
         uploadTask.addOnSuccessListener(taskSnapshot -> {
             // Video uploaded successfully
             // You can get the download URL or perform any other actions here
+
+            // Show a Toast message
+
+            Toast.makeText(getApplicationContext(), "Video uploaded successfully", Toast.LENGTH_SHORT).show();
         }).addOnFailureListener(e -> {
             // Handle errors while uploading the video
+
+            // Show a Toast message for failure
+            Toast.makeText(getApplicationContext(), "Failed to upload video", Toast.LENGTH_SHORT).show();
         });
     }
+
 }
