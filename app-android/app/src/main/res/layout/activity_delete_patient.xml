@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".activity_delete_patient"
+    android:background="@color/white">
+
+    <!-- Title TextView -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Patient"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textColor="#604B96"
+        android:layout_marginBottom="16dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pleace provide correct patient NIC number "
+        android:layout_gravity="left"
+        android:textSize="15sp"
+        android:layout_marginStart="15dp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Delete Patient UI -->
+    <EditText
+        android:id="@+id/delete_nic_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter NIC Number"
+        android:textColorHint="@android:color/black"
+        android:textColor="@android:color/black"
+        android:background="@drawable/edittext_border"
+        android:layout_marginTop="16dp"
+        />
+
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Patient"
+        android:background="@drawable/log_btn_background"
+        app:backgroundTint="#604B97"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

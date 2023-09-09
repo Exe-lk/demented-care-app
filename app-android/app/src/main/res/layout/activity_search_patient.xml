@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SearchPatientActivity"
+    android:background="@color/white">
+
+    <!-- Title TextView -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Patient"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Search Criteria EditText and Button -->
+    <EditText
+        android:id="@+id/search_nic_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter NIC Number"
+        android:textColorHint="@android:color/black"
+        android:textColor="@android:color/black"
+        android:background="@drawable/edittext_border"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:background="@drawable/log_btn_background"
+        android:layout_marginTop="16dp"
+        app:backgroundTint="#5F4A96"
+        android:textColor="@color/white"/>
+
+    <!-- Patient Details TextViews (Hidden by default) -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/edittext_border"
+    android:layout_marginTop="50dp"
+    android:gravity="center"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
+    <TextView
+        android:id="@+id/patient_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient Name:"
+        android:textSize="18sp"
+
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/patient_age_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient NIC:"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/patient_guardiane_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient Guardian Name:"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"/>
+
+
+</LinearLayout>
+
+</LinearLayout>
