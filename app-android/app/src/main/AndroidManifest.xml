@@ -28,7 +28,7 @@
             android:name=".voicerecorder"
             android:exported="false" />
         <activity
-            android:name=".Videorecorderactivity"
+            android:name=".SplashScreen"
             android:exported="false" />
         <activity
             android:name=".pair_health_device"
@@ -39,7 +39,6 @@
         <activity
             android:name=".DeviceListActivity"
             android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDWMrpIrBIM1KkuBeRgylmScB4qZ7VI4z4" />
@@ -102,7 +101,7 @@
             android:name=".patientsimotionscheck"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Videorecorderactivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
