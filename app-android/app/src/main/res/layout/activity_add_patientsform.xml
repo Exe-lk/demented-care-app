@@ -1,35 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".AddPatientsform">
-
-    <Spinner
-        android:id="@+id/gps_device_spinner"
+    tools:context=".AddPatientsform"
+    android:background="@color/white">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!-- res/layout/activity_add_patientsform.xml -->
-    <EditText
-        android:id="@+id/nic_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter NIC Number"
-        android:inputType="text"
-        android:layout_marginTop="16dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp">
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+            <TextView
+                android:id="@+id/Mainheadding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Add Patients"
+                android:textColor="#7876E1"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/subheading_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:text="Provide a Patient Details Only"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Mainheadding"/>
+            <!-- First Name -->
+            <TextView
+                android:id="@+id/firstnametext"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subheading_1"
+                android:text="First Name"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/etfirstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/firstnametext"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter patient first name..."
+                android:inputType="text"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <!-- Last Name -->
+            <TextView
+                android:id="@+id/lastnametext"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etfirstname"
+                android:text="Last Name"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/etlastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lastnametext"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter patient last name..."
+                android:inputType="text"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <TextView
+                android:id="@+id/contacttext"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etlastname"
+                android:text="Home Contact Number"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/etconnum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contacttext"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter  mobile number..."
+                android:inputType="number"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <TextView
+                android:id="@+id/tvnic"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etconnum"
+                android:text="Patient NIC"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/nic_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvnic"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter patient NIC"
+                android:inputType="number"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <TextView
+                android:layout_marginTop="20sp"
+                android:id="@+id/subheading_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:text="Provide a Patient's guardian Details Only"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/nic_edit_text"/>
+            <TextView
+                android:id="@+id/tvguardname"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subheading_2"
+                android:text="Guardian Name"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/etgname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvguardname"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter Full name"
+                android:inputType="text"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <TextView
+                android:id="@+id/tvaddress"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etgname"
+                android:text="Guardian Address"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/etaddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvaddress"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Enter Address of Guardian"
+                android:inputType="text"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <TextView
+                android:id="@+id/tvcontact2"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etaddress"
+                android:text="Guardian Contact No"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/etcontact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvaddress"
+                android:layout_marginTop="78dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="Conact Number"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/tvguardnic"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etaddress"
+                android:layout_marginTop="90dp"
+                android:text="Guardian NIC No"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/et_g_nic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvguardnic"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                android:hint="NIC Number"
+                android:inputType="number"
+                android:padding="10dp"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/black"
+                android:textColorHint="#535151"/>
+            <TextView
+                android:id="@+id/tvtrackingid"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_g_nic"
+                android:text="Pleace Select Tracking Device"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <Spinner
+                android:id="@+id/gps_device_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/tvtrackingid"
+                android:background="@drawable/edittext_border" />
+<!--            submit button start-->
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_below="@+id/gps_device_spinner"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/log_btn_background"
+                app:backgroundTint="#7876E1"
+                android:padding="10dp"
+                android:text="Add Patient"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+<!--            submit button end-->
 
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginTop="16dp"
-        />
+        </RelativeLayout>
+    </LinearLayout>
 
 
-</LinearLayout>
+
+</ScrollView>
