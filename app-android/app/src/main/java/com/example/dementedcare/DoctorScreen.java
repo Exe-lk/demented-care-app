@@ -80,7 +80,7 @@ public class DoctorScreen extends AppCompatActivity {
     }
 
     private void openCheckPatientEmotions() {
-        Intent intent = new Intent(this, patientsimotionscheck.class);
+        Intent intent = new Intent(this, Videorecorderactivity.class);
         startActivity(intent);
     }
 
