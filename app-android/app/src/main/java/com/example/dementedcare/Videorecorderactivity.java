@@ -1,7 +1,6 @@
 package com.example.dementedcare;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -20,14 +18,19 @@ public class Videorecorderactivity extends AppCompatActivity {
 
     private static final int VIDEO_CAPTURE_REQUEST = 1;
     private Button recordButton;
+    private Button uploadButton;
+    private Button cancelButton;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
+    private Uri videoUri; // Store the recorded video URI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videorecorderactivity);
         recordButton = findViewById(R.id.recordButton);
+        uploadButton = findViewById(R.id.uploadBtn);
+        cancelButton = findViewById(R.id.caseldBtn);
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("videos");
 
@@ -38,6 +41,21 @@ public class Videorecorderactivity extends AppCompatActivity {
                 startActivityForResult(videoCaptureIntent, VIDEO_CAPTURE_REQUEST);
             }
         });
+
+        uploadButton.setOnClickListener(view -> { //set on click listener
+            if (videoUri != null) {
+                uploadVideoToFirebase(videoUri);
+            }
+        });
+
+        cancelButton.setOnClickListener(view -> { //set on click listener
+            // Cancel the recording (if it's in progress)
+            if (VIDEO_CAPTURE_REQUEST == RESULT_OK) {
+                // If the recording is in progress, cancel it
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -45,10 +63,7 @@ public class Videorecorderactivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == VIDEO_CAPTURE_REQUEST && resultCode == RESULT_OK) {
-            Uri videoUri = data.getData();
-            if (videoUri != null) {
-                uploadVideoToFirebase(videoUri);
-            }
+            videoUri = data.getData();
         }
     }
 

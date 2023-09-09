@@ -61,7 +61,7 @@
         android:layout_height="200dp">
 
         <Button
-            android:id="@+id/cancel_button"
+            android:id="@+id/uploadBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
