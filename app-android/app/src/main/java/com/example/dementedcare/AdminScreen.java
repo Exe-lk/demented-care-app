@@ -18,6 +18,9 @@ public class AdminScreen extends AppCompatActivity {
         ImageButton manageDoctorsButton = findViewById(R.id.button);  // doctor button
         ImageButton manageNurseButton = findViewById(R.id.button2);  // nurse button
         ImageButton TrackingButton = findViewById(R.id.trackingdevice);  // nurse button
+        ImageButton managepatients= findViewById(R.id.managepatients);  // manage patients button
+        ImageButton addstaff= findViewById(R.id.addemployee); //add staff
+        ImageButton addlogout= findViewById(R.id.logoutbtn); //logout
 
         manageDoctorsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +41,30 @@ public class AdminScreen extends AppCompatActivity {
                 openAddHealthTrackerDevice();
             }
         });
+        managepatients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAddmanagepatients();
+            }
+        });
+        managepatients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAddmanagepatients();
+            }
+        });
+        addstaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAddstaff();
+            }
+        });
+        addlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openlogout();
+            }
+        });
     }
     private void openAddDoctorScreen() {
         Intent intent = new Intent(this, Doctordetails.class);
@@ -45,11 +72,23 @@ public class AdminScreen extends AppCompatActivity {
     }
 
     private void openManageNurseScreen() {
-        Intent intent = new Intent(this,AddDoctorScreen.class);
+        Intent intent = new Intent(this,Doctordetails.class);
         startActivity(intent);
     }
     private void openAddHealthTrackerDevice() {
         Intent intent = new Intent(this,AddHealthTrackerDevice.class);
+        startActivity(intent);
+    }
+    private void openAddmanagepatients() {
+        Intent intent = new Intent(this,AddPatientsform.class);
+        startActivity(intent);
+    }
+    private void openAddstaff() {
+        Intent intent = new Intent(this,AddDoctorScreen.class);
+        startActivity(intent);
+    }
+    private void openlogout() {
+        Intent intent = new Intent(this,LoginScreen.class);
         startActivity(intent);
     }
 }

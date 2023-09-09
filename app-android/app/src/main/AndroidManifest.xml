@@ -57,7 +57,7 @@
             android:name=".PatientHealthDetails"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".AddPatientsform"
             android:exported="false" />
         <activity
             android:name=".Chatbot"
@@ -102,7 +102,7 @@
             android:name=".patientsimotionscheck"
             android:exported="false" />
         <activity
-            android:name=".AddPatientsform"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -111,5 +111,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
