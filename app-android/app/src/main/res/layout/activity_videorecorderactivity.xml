@@ -41,9 +41,17 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_width="187dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+
+        >
 
         <Button
             android:id="@+id/caseldBtn"
@@ -53,12 +61,17 @@
             android:layout_marginTop="1dp"
             android:background="@drawable/log_btn_background"
             android:text="Cancel"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:backgroundTint="#FE4F5A"/>
 
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_width="187dp"
+        android:layout_height="100dp"
+        android:gravity="center">
 
         <Button
             android:id="@+id/uploadBtn"
@@ -68,9 +81,13 @@
             android:layout_marginTop="1dp"
             android:background="@drawable/log_btn_background"
             android:text="Upload"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:backgroundTint="#09810E"/>
 
     </LinearLayout>
+</LinearLayout>
 
 
 
