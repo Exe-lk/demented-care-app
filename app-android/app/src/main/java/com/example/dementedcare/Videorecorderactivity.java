@@ -65,6 +65,8 @@ public class Videorecorderactivity extends AppCompatActivity {
                 // If the recording is in progress, cancel it
                 setResult(RESULT_CANCELED);
                 finish();
+                Intent intent = new Intent(this, Videorecorderactivity.class);
+                startActivity(intent);
             }
         });
     }
