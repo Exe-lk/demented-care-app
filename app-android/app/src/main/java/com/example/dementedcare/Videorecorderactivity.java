@@ -3,6 +3,7 @@ package com.example.dementedcare;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +11,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.VideoView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import android.os.Vibrator;
+
 public class Videorecorderactivity extends AppCompatActivity {
 
     private static final int VIDEO_CAPTURE_REQUEST = 1;
@@ -33,31 +38,39 @@ public class Videorecorderactivity extends AppCompatActivity {
     private LinearLayout buttonLayout;
 
     private Vibrator vibrator;
+
+    private FirebaseAuth firebaseAuth; // Firebase Authentication instance
+    private FirebaseUser currentUser; // Firebase User
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videorecorderactivity);
+
         recordButton = findViewById(R.id.recordButton);
-
         uploadButton = findViewById(R.id.uploadBtn);
-
         cancelButton = findViewById(R.id.caseldBtn);
-
-
         firebaseStorage = FirebaseStorage.getInstance();
-
         buttonLayout = findViewById(R.id.buttonLayout);
         videoImageView = findViewById(R.id.videoImageView);
         videoImageView.setVisibility(View.VISIBLE); // Initially visible
         videoView = findViewById(R.id.videoView);
         videoView.setVisibility(View.GONE); // Initially gone
         buttonLayout.setVisibility(View.GONE);
+
         // Initialize the Vibrator
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-        storageReference = firebaseStorage.getReference().child("videos");
+        // Initialize Firebase Authentication
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser(); // Get the current user
 
-
+        if (currentUser != null) {
+            // Get the user's unique ID
+            String userId = currentUser.getUid();
+            // Create a storage reference with the user's ID as part of the video name
+            storageReference = firebaseStorage.getReference().child("videos").child("detect").child(userId);
+        }
 
         recordButton.setOnClickListener(view -> {
             // Open the video recorder
@@ -67,21 +80,15 @@ public class Videorecorderactivity extends AppCompatActivity {
             }
         });
 
-
         uploadButton.setOnClickListener(view -> {
             if (videoUri != null) {
                 uploadVideoToFirebase(videoUri);
             }
-            // ... (Other upload button logic)
-            // Hide the button layout after upload or cancel
-//            buttonLayout.setVisibility(View.GONE);
         });
-
 
         cancelButton.setOnClickListener(view -> {
             // Cancel the recording (if it's in progress)
             if (videoUri != null) { // Check if a video has been recorded
-                // If the recording is in progress, cancel it
                 setResult(RESULT_CANCELED);
                 finish();
                 Intent intent = new Intent(this, Videorecorderactivity.class);
@@ -97,38 +104,31 @@ public class Videorecorderactivity extends AppCompatActivity {
 
         if (requestCode == VIDEO_CAPTURE_REQUEST && resultCode == RESULT_OK) {
             videoUri = data.getData();
-            // Display the recorded video in the VideoView
             videoImageView.setVisibility(View.GONE); // Hide the image
             videoView.setVisibility(View.VISIBLE); // Show the VideoView
             videoView.setVideoURI(videoUri);
             videoView.start(); // Start video playback
-
-            // Show the button layout (Upload and Cancel buttons)
             buttonLayout.setVisibility(View.VISIBLE);
         }
     }
 
     private void uploadVideoToFirebase(Uri videoUri) {
-        StorageReference videoRef = storageReference.child(System.currentTimeMillis() + ".mp4");
-        UploadTask uploadTask = videoRef.putFile(videoUri);
+        if (storageReference != null) {
+            // Use the videoUri and the user's ID to create a unique video name
+            StorageReference videoRef = storageReference.child(System.currentTimeMillis() + ".mp4");
+            UploadTask uploadTask = videoRef.putFile(videoUri);
 
-        uploadTask.addOnSuccessListener(taskSnapshot -> {
-            // Video uploaded successfully
-            // You can get the download URL or perform any other actions here
-
-            // Show a Toast message
-            // Vibrate the phone
-            vibratePhone();
-
-
-            Toast.makeText(getApplicationContext(), "Video uploaded successfully", Toast.LENGTH_SHORT).show();
-        }).addOnFailureListener(e -> {
-            // Handle errors while uploading the video
-
-            // Show a Toast message for failure
-            Toast.makeText(getApplicationContext(), "Failed to upload video", Toast.LENGTH_SHORT).show();
-        });
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
+                // Video uploaded successfully
+                vibratePhone();
+                Toast.makeText(getApplicationContext(), "Video uploaded successfully", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> {
+                // Handle errors while uploading the video
+                Toast.makeText(getApplicationContext(), "Failed to upload video", Toast.LENGTH_SHORT).show();
+            });
+        }
     }
+
     private void vibratePhone() {
         // Vibrate the phone for 500 milliseconds (0.5 seconds)
         if (vibrator != null) {
