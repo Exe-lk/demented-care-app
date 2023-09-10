@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,87 +9,77 @@
     android:orientation="vertical"
     android:background="@drawable/main_header_selector">
 
+    <ImageView
+        android:id="@+id/videoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="306dp"
+        android:src="@drawable/video_record"
+        android:visibility="visible" />
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="339dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="267dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="339dp"
-            android:src="@drawable/video_record" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="61dp">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="244dp">
 
         <Button
             android:id="@+id/recordButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:layout_centerInParent="true"
             android:layout_marginTop="100dp"
             android:background="@drawable/log_btn_background"
             android:text="Record Video"
             android:textColor="@color/white" />
-
-    </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-
-    <LinearLayout
-        android:layout_width="187dp"
-        android:layout_height="100dp"
-        android:gravity="center"
-
-        >
-
-        <Button
-            android:id="@+id/caseldBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="1dp"
-            android:background="@drawable/log_btn_background"
-            android:text="Cancel"
-            android:textColor="@color/white"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:backgroundTint="#FE4F5A"/>
-
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="187dp"
-        android:layout_height="100dp"
-        android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-        <Button
-            android:id="@+id/uploadBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="1dp"
-            android:background="@drawable/log_btn_background"
-            android:text="Upload"
-            android:textColor="@color/white"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:backgroundTint="#09810E"/>
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="90dp"
+            android:gravity="center">
 
+            <Button
+                android:id="@+id/caseldBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/log_btn_background"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                app:backgroundTint="#FE4F5A" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="90dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/uploadBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/log_btn_background"
+                android:text="Upload"
+                android:textColor="@color/white"
+                app:backgroundTint="#09810E" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-
-
-
-
-
 </LinearLayout>
