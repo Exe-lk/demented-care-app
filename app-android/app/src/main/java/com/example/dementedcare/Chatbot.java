@@ -1,5 +1,7 @@
 package com.example.dementedcare;
 
+import static com.android.volley.toolbox.Volley.newRequestQueue;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,11 +13,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +47,8 @@ public class Chatbot extends AppCompatActivity {
 
     private EditText userMsgEdt;
     private FloatingActionButton sendMsgFAB;
+
+    private String resmsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,55 +73,97 @@ public class Chatbot extends AppCompatActivity {
                 if (message.isEmpty()) {
                     Toast.makeText(Chatbot.this, "Please enter your message", Toast.LENGTH_SHORT).show();
                 } else {
-                    getResponse(message);
+                    postrequest(message);
+//                    getResponse(message);
                     userMsgEdt.setText("");
                 }
             }
         });
     }
 
-
-    private void getResponse(String message) {
-        chatsModelArrayList.add(new ChatModel(message, USER_KEY));
+    // function for http post request by using volley
+    private void postrequest(String ReqValue) {
+        chatsModelArrayList.add(new ChatModel(ReqValue, USER_KEY));
         chatRVAdapter.notifyDataSetChanged();
 
-        String baseUrl = "http://api.brainshop.ai";
-        String bid = "176237";
-        String key = "dFzMjo08SPUjw9zJ";
-        String uid = "[uid]"; // Replace [uid] with the appropriate user ID if needed
-        String messageParam = "";
+        String url = "https://noted-mink-legally.ngrok-free.app/answer";
 
-        try {
-            messageParam = URLEncoder.encode(message, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        RequestQueue queue = newRequestQueue(this);
 
-        String url = baseUrl + "/get?bid=" + bid + "&key=" + key + "&uid=" + uid + "&msg=" + messageParam;
+        // Set a custom retry policy with a longer timeout
+        int timeoutMillis = 30000; // 30 seconds
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                timeoutMillis,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        );
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-
-        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
-        Call<MsgModel> call = retrofitAPI.getMessage(url);
-        call.enqueue(new Callback<MsgModel>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new com.android.volley.Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
-                if (response.isSuccessful()) {
-                    MsgModel model = response.body();
-                    chatsModelArrayList.add(new ChatModel(model.getCnt(), BOT_KEY));
+            public void onResponse(JSONObject response) {
+
+                try {
+                    resmsg = response.getString("answer");
+                    System.out.println(resmsg);
+                    Toast.makeText(getApplicationContext(), resmsg, Toast.LENGTH_SHORT).show();
+
+                    chatsModelArrayList.add(new ChatModel(resmsg, BOT_KEY));
                     chatRVAdapter.notifyDataSetChanged();
+
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+                resmsg = "sorry network error occors. ";
+
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("query", ReqValue);
+                    String requestBody = jsonObject.toString();
+                    return requestBody.getBytes("utf-8");
+
+
+                } catch (JSONException | UnsupportedEncodingException uee) {
+
+                    System.out.println(uee.getMessage().toString());
+
+                    return null;
                 }
             }
 
             @Override
-            public void onFailure(Call<MsgModel> call, Throwable t) {
-                chatsModelArrayList.add(new ChatModel("Hi, this is a chatbot test mode.", BOT_KEY));
-                chatRVAdapter.notifyDataSetChanged();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+
+                return params;
             }
-        });
+        };
+        // below line is to make
+
+        // Set the custom retry policy for the request
+        request.setRetryPolicy(retryPolicy);
+
+        // a json object request.
+        queue.add(request);
+
     }
+
+
 }
