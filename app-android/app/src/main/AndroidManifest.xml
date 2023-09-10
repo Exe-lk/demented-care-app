@@ -43,7 +43,7 @@
             android:name=".voicerecorder"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Videorecorderactivity"
             android:exported="false" />
         <activity
             android:name=".pair_health_device"
@@ -117,7 +117,7 @@
             android:name=".patientsimotionscheck"
             android:exported="false" />
         <activity
-            android:name=".Videorecorderactivity"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

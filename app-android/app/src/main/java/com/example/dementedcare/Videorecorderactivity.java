@@ -42,6 +42,8 @@ public class Videorecorderactivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; // Firebase Authentication instance
     private FirebaseUser currentUser; // Firebase User
 
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +69,9 @@ public class Videorecorderactivity extends AppCompatActivity {
 
         if (currentUser != null) {
             // Get the user's unique ID
-            String userId = currentUser.getUid();
+            userId = currentUser.getUid();
             // Create a storage reference with the user's ID as part of the video name
-            storageReference = firebaseStorage.getReference().child("videos").child("detect").child(userId);
+            storageReference = firebaseStorage.getReference().child("videos").child("detect");
         }
 
         recordButton.setOnClickListener(view -> {
@@ -115,13 +117,14 @@ public class Videorecorderactivity extends AppCompatActivity {
     private void uploadVideoToFirebase(Uri videoUri) {
         if (storageReference != null) {
             // Use the videoUri and the user's ID to create a unique video name
-            StorageReference videoRef = storageReference.child(System.currentTimeMillis() + ".mp4");
+            StorageReference videoRef = storageReference.child(userId + ".mp4");
             UploadTask uploadTask = videoRef.putFile(videoUri);
 
             uploadTask.addOnSuccessListener(taskSnapshot -> {
                 // Video uploaded successfully
                 vibratePhone();
                 Toast.makeText(getApplicationContext(), "Video uploaded successfully", Toast.LENGTH_SHORT).show();
+                OpenFaceResults();
             }).addOnFailureListener(e -> {
                 // Handle errors while uploading the video
                 Toast.makeText(getApplicationContext(), "Failed to upload video", Toast.LENGTH_SHORT).show();
@@ -134,5 +137,10 @@ public class Videorecorderactivity extends AppCompatActivity {
         if (vibrator != null) {
             vibrator.vibrate(500);
         }
+    }
+
+    private void OpenFaceResults(){
+        Intent intent = new Intent(this,face_results.class);
+        startActivity(intent);
     }
 }
