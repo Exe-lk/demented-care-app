@@ -22,38 +22,35 @@
         android:visibility="gone"
         android:layout_gravity="center"/>
 
-
-    <LinearLayout
+    <!-- FrameLayout to layer the buttons -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="244dp">
+        android:layout_height="match_parent">
 
+        <!-- Button to record video -->
         <Button
             android:id="@+id/recordButton"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="100dp"
+            android:layout_gravity="center"
             android:background="@drawable/log_btn_background"
             android:text="Record Video"
             android:textColor="@color/white" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-
+        <!-- Button layout to hold Upload and Cancel buttons -->
         <LinearLayout
-            android:layout_width="180dp"
-            android:layout_height="90dp"
-            android:gravity="center">
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/caseldBtn"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="20dp"
@@ -61,18 +58,12 @@
                 android:text="Cancel"
                 android:textColor="@color/white"
                 app:backgroundTint="#FE4F5A" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="180dp"
-            android:layout_height="90dp"
-            android:gravity="center">
 
             <Button
                 android:id="@+id/uploadBtn"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="20dp"
@@ -81,5 +72,5 @@
                 android:textColor="@color/white"
                 app:backgroundTint="#09810E" />
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

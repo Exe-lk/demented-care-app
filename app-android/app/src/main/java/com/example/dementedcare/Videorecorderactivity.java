@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.VideoView;
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
+import android.os.Vibrator;
 public class Videorecorderactivity extends AppCompatActivity {
 
     private static final int VIDEO_CAPTURE_REQUEST = 1;
@@ -29,21 +30,34 @@ public class Videorecorderactivity extends AppCompatActivity {
 
     private ImageView videoImageView;
     private VideoView videoView;
+    private LinearLayout buttonLayout;
 
+    private Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videorecorderactivity);
         recordButton = findViewById(R.id.recordButton);
-        uploadButton = findViewById(R.id.uploadBtn);
-        cancelButton = findViewById(R.id.caseldBtn);
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference().child("videos");
 
+        uploadButton = findViewById(R.id.uploadBtn);
+
+        cancelButton = findViewById(R.id.caseldBtn);
+
+
+        firebaseStorage = FirebaseStorage.getInstance();
+
+        buttonLayout = findViewById(R.id.buttonLayout);
         videoImageView = findViewById(R.id.videoImageView);
         videoImageView.setVisibility(View.VISIBLE); // Initially visible
         videoView = findViewById(R.id.videoView);
         videoView.setVisibility(View.GONE); // Initially gone
+        buttonLayout.setVisibility(View.GONE);
+        // Initialize the Vibrator
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        storageReference = firebaseStorage.getReference().child("videos");
+
+
 
         recordButton.setOnClickListener(view -> {
             // Open the video recorder
@@ -53,11 +67,16 @@ public class Videorecorderactivity extends AppCompatActivity {
             }
         });
 
-        uploadButton.setOnClickListener(view -> { //set on click listener
+
+        uploadButton.setOnClickListener(view -> {
             if (videoUri != null) {
                 uploadVideoToFirebase(videoUri);
             }
+            // ... (Other upload button logic)
+            // Hide the button layout after upload or cancel
+//            buttonLayout.setVisibility(View.GONE);
         });
+
 
         cancelButton.setOnClickListener(view -> {
             // Cancel the recording (if it's in progress)
@@ -68,6 +87,7 @@ public class Videorecorderactivity extends AppCompatActivity {
                 Intent intent = new Intent(this, Videorecorderactivity.class);
                 startActivity(intent);
             }
+            buttonLayout.setVisibility(View.GONE);
         });
     }
 
@@ -82,6 +102,9 @@ public class Videorecorderactivity extends AppCompatActivity {
             videoView.setVisibility(View.VISIBLE); // Show the VideoView
             videoView.setVideoURI(videoUri);
             videoView.start(); // Start video playback
+
+            // Show the button layout (Upload and Cancel buttons)
+            buttonLayout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -94,6 +117,9 @@ public class Videorecorderactivity extends AppCompatActivity {
             // You can get the download URL or perform any other actions here
 
             // Show a Toast message
+            // Vibrate the phone
+            vibratePhone();
+
 
             Toast.makeText(getApplicationContext(), "Video uploaded successfully", Toast.LENGTH_SHORT).show();
         }).addOnFailureListener(e -> {
@@ -102,5 +128,11 @@ public class Videorecorderactivity extends AppCompatActivity {
             // Show a Toast message for failure
             Toast.makeText(getApplicationContext(), "Failed to upload video", Toast.LENGTH_SHORT).show();
         });
+    }
+    private void vibratePhone() {
+        // Vibrate the phone for 500 milliseconds (0.5 seconds)
+        if (vibrator != null) {
+            vibrator.vibrate(500);
+        }
     }
 }
