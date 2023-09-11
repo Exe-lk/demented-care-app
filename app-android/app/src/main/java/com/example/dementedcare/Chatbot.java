@@ -4,6 +4,7 @@ import static com.android.volley.toolbox.Volley.newRequestQueue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -48,6 +49,9 @@ public class Chatbot extends AppCompatActivity {
     private EditText userMsgEdt;
     private FloatingActionButton sendMsgFAB;
 
+    //Progress bar
+    ProgressDialog pd;
+
     private String resmsg;
 
     @Override
@@ -66,6 +70,8 @@ public class Chatbot extends AppCompatActivity {
         chatRV.setLayoutManager(manager);
         chatRV.setAdapter(chatRVAdapter);
 
+        pd = new ProgressDialog(Chatbot.this);
+
         sendMsgFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +89,11 @@ public class Chatbot extends AppCompatActivity {
 
     // function for http post request by using volley
     private void postrequest(String ReqValue) {
+
+        //Set title of progress bar
+        pd.setTitle("Sending msg...");
+        pd.show();
+
         chatsModelArrayList.add(new ChatModel(ReqValue, USER_KEY));
         chatRVAdapter.notifyDataSetChanged();
 
@@ -103,6 +114,7 @@ public class Chatbot extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 try {
+                    pd.dismiss();
                     resmsg = response.getString("answer");
                     System.out.println(resmsg);
                     Toast.makeText(getApplicationContext(), resmsg, Toast.LENGTH_SHORT).show();
@@ -120,7 +132,7 @@ public class Chatbot extends AppCompatActivity {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                pd.dismiss();
                 resmsg = "sorry network error occors. ";
 
             }
@@ -141,7 +153,7 @@ public class Chatbot extends AppCompatActivity {
 
                 } catch (JSONException | UnsupportedEncodingException uee) {
 
-                    System.out.println(uee.getMessage().toString());
+                    pd.dismiss();
 
                     return null;
                 }

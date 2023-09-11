@@ -14,32 +14,48 @@ import android.widget.Toast; // Import Toast for displaying error messages
 
 import com.example.dementedcare.model.HelthForm;
 
+import org.json.JSONArray;
+
 
 public class predictform extends AppCompatActivity {
+
+    private String receivedData;
+
+    private Spinner genderSpinner,chestSpinner,bloodsugar,ecgSpprinter,eiaSpprinter,pealexSpprinter,fluSpprinter,thresultSpprinter;
+
+    private Button btnSubmit,btncansel;
+
+    private EditText etAge,etRbp,etChl,etconnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predictform);
 
+        Intent intent = getIntent();
+        receivedData = intent.getStringExtra("heartRate");
+
         // Spinners
-        Spinner genderSpinner = findViewById(R.id.etGender);
-        Spinner chestSpinner  = findViewById(R.id.etCps);
-        Spinner bloodsugar = findViewById(R.id.etFbs);
-        Spinner ecgSpprinter = findViewById(R.id.etEcg);
-        Spinner eiaSpprinter = findViewById(R.id.etEia);
-        Spinner pealexSpprinter = findViewById(R.id.etPeakEX);
-        Spinner fluSpprinter = findViewById(R.id.etFlu);
-        Spinner thresultSpprinter = findViewById(R.id.etthreresult);
+        genderSpinner = findViewById(R.id.etGender);
+        chestSpinner  = findViewById(R.id.etCps);
+        bloodsugar = findViewById(R.id.etFbs);
+        ecgSpprinter = findViewById(R.id.etEcg);
+        eiaSpprinter = findViewById(R.id.etEia);
+        pealexSpprinter = findViewById(R.id.etPeakEX);
+        fluSpprinter = findViewById(R.id.etFlu);
+        thresultSpprinter = findViewById(R.id.etthreresult);
 
         // Buttons
-        Button btnSubmit = findViewById(R.id.btnSubmit);
-        Button btncansel = findViewById(R.id.btncansel);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        btncansel = findViewById(R.id.btncansel);
 
         // User input values
-        EditText etAge = findViewById(R.id.etAge);
-        EditText etRbp = findViewById(R.id.etRbp);
-        EditText etChl = findViewById(R.id.etChl);
+        etAge = findViewById(R.id.etAge);
+        etRbp = findViewById(R.id.etRbp);
+        etChl = findViewById(R.id.etChl);
+        etconnum = findViewById(R.id.etconnum);
+
+        etconnum.setText(receivedData.toString());
 
         // Define spinner options
         String[] genderOptions = {"Male", "Female", "Other"};
@@ -111,18 +127,28 @@ public class predictform extends AppCompatActivity {
                     Log.d("User Input", "Chl: " + chl);
                     // ... Log other input data
 
+//
 
 
                     // Create an intent to start the new activity
                     Intent intent = new Intent(predictform.this, AIPredictionActivity.class);
-
-
                     // Add the user input data as extras to the intent
-                    intent.putExtra("Age", age);
-                    intent.putExtra("Rbp", rbp);
-                    intent.putExtra("Chl", chl);
-                    // ... Add other input data as extras
 
+                    // ... Add other input data as extras
+                    intent.putExtra("age",Integer.parseInt(age));
+                    intent.putExtra("sex", Integer.parseInt(selectedGender));
+                    intent.putExtra("cp", Integer.parseInt(selectedChest));
+                    intent.putExtra("trtbps", Integer.parseInt(rbp));
+                    intent.putExtra("chol", Integer.parseInt(chl));
+                    intent.putExtra("fbs", Integer.parseInt(selectedBloodSugar));
+                    intent.putExtra("restecg", Integer.parseInt(selectedEcg));
+                    intent.putExtra("thalachh", Integer.parseInt(receivedData.toString()));
+                    intent.putExtra("exng", Integer.parseInt(selectedEia));
+//                    Fix ST Depression Induced by Exercise Relative to Rest
+//                    intent.putExtra("oldpeak", Integer.parseInt());
+                    intent.putExtra("slp", Integer.parseInt(selectedPeakEX));
+                    intent.putExtra("caa", Integer.parseInt(selectedFlu));
+                    intent.putExtra("thall", Integer.parseInt(selectedThresult));
                     // Start the new activity
                     startActivity(intent);
                 } else {
@@ -143,6 +169,7 @@ public class predictform extends AppCompatActivity {
 
                 // Add any data you want to pass to the new activity using intent extras
                 // intent.putExtra("key", "value");
+
 
                 // Start the new activity
                 startActivity(intent);

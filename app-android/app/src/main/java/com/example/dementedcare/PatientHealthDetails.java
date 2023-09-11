@@ -29,18 +29,15 @@ import java.util.Map;
 public class PatientHealthDetails extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
-    private TextView tempTextView;
-    private TextView bloodPressureTextView;
-    private TextView heartRateTextView;
-    private TextView bloodO2TextView;
+    private TextView tempTextView,bloodPressureTextView,heartRateTextView,bloodO2TextView;
 
     private EditText nicNumberEditText;
-    private Button addDataButton;
+    private Button addDataButton, aiPredictionButton;
     private FirebaseFirestore firestore;
-    private Double bodyTemperatureDouble;
-    private Double bloodPressureDouble;
-    private Double heartRateDouble;
-    private Double bloodO2Double;
+    private Double bodyTemperatureDouble,bloodPressureDouble,heartRateDouble,bloodO2Double;
+
+    private String bodyTemperature,bloodPressure,heartRate,bloodO2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +53,13 @@ public class PatientHealthDetails extends AppCompatActivity {
         bloodPressureTextView = findViewById(R.id.bloodox);
         heartRateTextView = findViewById(R.id.heartrate);
         bloodO2TextView = findViewById(R.id.bloodox2);
-        Button aiPredictionButton = findViewById(R.id.aibtn);
+        aiPredictionButton = findViewById(R.id.aibtn);
 
         nicNumberEditText = findViewById(R.id.nicNumberEditText);
         addDataButton = findViewById(R.id.addDataButton);
 
         // Add ValueEventListener to listen for data changes
 
-        aiPredictionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create an Intent to open AIPredictionActivity
-                Intent intent = new Intent(PatientHealthDetails.this, predictform.class);
-                startActivity(intent);
-            }
-        });
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,10 +71,10 @@ public class PatientHealthDetails extends AppCompatActivity {
                 bloodO2Double = dataSnapshot.child("blood_oxygen_level").getValue(Double.class);
 
                 // Convert Double values to String
-                String bodyTemperature = String.valueOf(bodyTemperatureDouble);
-                String bloodPressure = String.valueOf(bloodPressureDouble);
-                String heartRate = String.valueOf(heartRateDouble);
-                String bloodO2 = String.valueOf(bloodO2Double);
+                bodyTemperature = String.valueOf(bodyTemperatureDouble);
+                bloodPressure = String.valueOf(bloodPressureDouble);
+                heartRate = String.valueOf(heartRateDouble);
+                bloodO2 = String.valueOf(bloodO2Double);
 
                 // Update TextView elements with retrieved data
                 tempTextView.setText(bodyTemperature);
@@ -97,6 +86,16 @@ public class PatientHealthDetails extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors, if any
+            }
+        });
+
+        aiPredictionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to open AIPredictionActivity
+                Intent intent = new Intent(PatientHealthDetails.this, predictform.class);
+                intent.putExtra("heartRate",heartRate);
+                startActivity(intent);
             }
         });
 

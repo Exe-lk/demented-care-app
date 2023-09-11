@@ -63,12 +63,11 @@
                             android:layout_height="45dp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/edittext_border"
-                            android:hint="Pleace enter patient NIC number"
                             android:gravity="center"
+                            android:hint="Pleace enter patient id number"
                             android:inputType="number"
                             android:textColor="#7876E1"
-                            android:textColorHint="@color/black"
-                            />
+                            android:textColorHint="@color/black" />
 
 
                     </LinearLayout>
