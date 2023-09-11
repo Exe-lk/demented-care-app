@@ -12,20 +12,18 @@ import android.widget.EditText;
 import android.util.Log; // Import Log for logging
 import android.widget.Toast; // Import Toast for displaying error messages
 
-import com.example.dementedcare.model.HelthForm;
-
-import org.json.JSONArray;
-
 
 public class predictform extends AppCompatActivity {
 
     private String receivedData;
+    private int receivedData1;
+    private double receivedData2;
 
     private Spinner genderSpinner,chestSpinner,bloodsugar,ecgSpprinter,eiaSpprinter,pealexSpprinter,fluSpprinter,thresultSpprinter;
 
     private Button btnSubmit,btncansel;
 
-    private EditText etAge,etRbp,etChl,etconnum;
+    private EditText etAge,etRbp,etChl,etconnum,etDp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +32,10 @@ public class predictform extends AppCompatActivity {
 
         Intent intent = getIntent();
         receivedData = intent.getStringExtra("heartRate");
+        if(receivedData != null){
+            receivedData2 = Double.parseDouble(receivedData);
+            receivedData1 = (int) receivedData2;
+        }
 
         // Spinners
         genderSpinner = findViewById(R.id.etGender);
@@ -54,6 +56,7 @@ public class predictform extends AppCompatActivity {
         etRbp = findViewById(R.id.etRbp);
         etChl = findViewById(R.id.etChl);
         etconnum = findViewById(R.id.etconnum);
+        etDp = findViewById(R.id.etDp);  //ST Depresssion induced by Exercise Relative Rest
 
         etconnum.setText(receivedData.toString());
 
@@ -108,6 +111,7 @@ public class predictform extends AppCompatActivity {
                 String age = etAge.getText().toString();
                 String rbp = etRbp.getText().toString();
                 String chl = etChl.getText().toString();
+                String oldpeek = etDp.getText().toString();
 
                 // Retrieve selected spinner values
                 String selectedGender = genderSpinner.getSelectedItem().toString();
@@ -118,6 +122,33 @@ public class predictform extends AppCompatActivity {
                 String selectedPeakEX = pealexSpprinter.getSelectedItem().toString();
                 String selectedFlu = fluSpprinter.getSelectedItem().toString();
                 String selectedThresult = thresultSpprinter.getSelectedItem().toString();
+
+                int genderValue;
+                if (selectedGender.equals("Male")) {
+                    genderValue = 0;
+                } else if (selectedGender.equals("Female")) {
+                    genderValue = 1;
+                } else {
+                    genderValue = 2; // Assuming "Other" corresponds to 2
+                }
+
+                int fastingbloodsugarValue;
+                if (selectedBloodSugar.equals("<=120 mg/dl")) {
+                    fastingbloodsugarValue = 0;
+                } else if (selectedBloodSugar.equals(">120 mg/dl")) {
+                    fastingbloodsugarValue = 1;
+                } else {
+                    fastingbloodsugarValue = 2; // Handle the case when neither option is selected
+                }
+
+                int eiaValue;
+                if (selectedEia.equals("No")) {
+                    eiaValue = 0;
+                } else if (selectedEia.equals("Yes")) {
+                    eiaValue = 1;
+                } else {
+                    eiaValue = 2; // Handle the case when neither option is selected
+                }
 
                 // Perform backend validation checks
                 if (isInputValid(age, rbp, chl, selectedGender, selectedChest, selectedBloodSugar, selectedEcg, selectedEia, selectedPeakEX, selectedFlu, selectedThresult)) {
@@ -135,20 +166,21 @@ public class predictform extends AppCompatActivity {
                     // Add the user input data as extras to the intent
 
                     // ... Add other input data as extras
-                    intent.putExtra("age",Integer.parseInt(age));
-                    intent.putExtra("sex", Integer.parseInt(selectedGender));
+                    intent.putExtra("age",age);
+                    intent.putExtra("sex", genderValue);
                     intent.putExtra("cp", Integer.parseInt(selectedChest));
-                    intent.putExtra("trtbps", Integer.parseInt(rbp));
-                    intent.putExtra("chol", Integer.parseInt(chl));
-                    intent.putExtra("fbs", Integer.parseInt(selectedBloodSugar));
-                    intent.putExtra("restecg", Integer.parseInt(selectedEcg));
-                    intent.putExtra("thalachh", Integer.parseInt(receivedData.toString()));
-                    intent.putExtra("exng", Integer.parseInt(selectedEia));
+                    intent.putExtra("trtbps", rbp);
+                    intent.putExtra("chol", chl);
+                    intent.putExtra("fbs", fastingbloodsugarValue);
+                    intent.putExtra("restecg", selectedEcg);
+
+                    intent.putExtra("thalachh", receivedData1);
+                    intent.putExtra("exng", eiaValue);
 //                    Fix ST Depression Induced by Exercise Relative to Rest
-//                    intent.putExtra("oldpeak", Integer.parseInt());
-                    intent.putExtra("slp", Integer.parseInt(selectedPeakEX));
-                    intent.putExtra("caa", Integer.parseInt(selectedFlu));
-                    intent.putExtra("thall", Integer.parseInt(selectedThresult));
+                    intent.putExtra("oldpeak", oldpeek);
+                    intent.putExtra("slp", selectedPeakEX);
+                    intent.putExtra("caa", selectedFlu);
+                    intent.putExtra("thall", selectedThresult);
                     // Start the new activity
                     startActivity(intent);
                 } else {
