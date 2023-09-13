@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +48,7 @@ public class Chatbot extends AppCompatActivity {
     private ChatRVAdapter chatRVAdapter;
 
     private EditText userMsgEdt;
-    private FloatingActionButton sendMsgFAB;
+    private ImageButton sendMsgFAB;
 
     //Progress bar
     ProgressDialog pd;
