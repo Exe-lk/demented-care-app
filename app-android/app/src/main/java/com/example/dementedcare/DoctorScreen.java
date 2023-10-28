@@ -101,7 +101,7 @@ public class DoctorScreen extends AppCompatActivity {
         startActivity(intent);
     }
     private void opentrack_patient() {
-        Intent intent = new Intent(this, AddHealthTrackerDevice.class);
+        Intent intent = new Intent(this, MapViewActivity.class);
         startActivity(intent);
     }
 

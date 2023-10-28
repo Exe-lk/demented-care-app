@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.dementedcare.model.LocationData;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -56,15 +57,22 @@ public class AddHealthTrackerDevice extends AppCompatActivity {
                 // Initialize Firebase Realtime Database reference
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("gps_tracking_devices");
 
-                // Create a new child node under 'gps_tracking_devices' with a unique key
-                DatabaseReference newDeviceRef = databaseReference.push();
-
-                // Set the values for the fields
-                newDeviceRef.child("gps_device_id").setValue(contents);
-                newDeviceRef.child("userId").setValue("empty");
-                newDeviceRef.child("longitude").setValue("empty");
-                newDeviceRef.child("latitude").setValue("empty");
-
+//                // Create a new child node under 'gps_tracking_devices' with a unique key
+//                DatabaseReference newDeviceRef = databaseReference.push();
+//
+//                // Set the values for the fields
+//                newDeviceRef.child("gps_device_id").setValue(contents);
+//                newDeviceRef.child("userId").setValue("empty");
+//                newDeviceRef.child("longitude").setValue("empty");
+//                newDeviceRef.child("latitude").setValue("empty");
+                LocationData locationData = new LocationData();
+                locationData.setGps_device_id(contents);
+                locationData.setLongitude(79.974101);
+                locationData.setLatitude(6.915584);
+                locationData.setIsAvalibele(true);
+                locationData.setOutSide(false);
+                locationData.setUserID("empty");
+                databaseReference.child(contents).setValue(locationData);
                 showPopupMessage("QR Code Scanned and Stored", "Scanned content: " + contents);
             }
         } else {

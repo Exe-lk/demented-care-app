@@ -9,6 +9,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.dementedcare.model.LocationData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.*;
@@ -22,6 +24,7 @@ public class AddPatientsform extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    private DatabaseReference locationRef;
     private FirebaseFirestore firestore;
 
     @Override
@@ -47,7 +50,7 @@ public class AddPatientsform extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Assuming your data structure is consistent
                     String deviceId = snapshot.child("gps_device_id").getValue(String.class);
-                    Boolean isAvailableValue = snapshot.child("isAvalibele").getValue(Boolean.class);
+                    Boolean isAvailableValue = snapshot.child("avalibele").getValue(Boolean.class);
 
                     // Check if isAvalibele is not null and is true
                     if (deviceId != null && isAvailableValue != null && isAvailableValue) {
@@ -120,7 +123,7 @@ public class AddPatientsform extends AppCompatActivity {
                                             guardianNICText.setText("");
 
                                             // Change the isAvalibele value to false for the selected GPS device
-                                            updateIsAvailableValue(selectedDeviceId, false);
+                                            updateIsAvailableValue(selectedDeviceId,nicNumber,false);
 
                                             // Provide a success message to the user
                                             Toast.makeText(AddPatientsform.this, "Data saved successfully", Toast.LENGTH_SHORT).show();
@@ -150,24 +153,52 @@ public class AddPatientsform extends AppCompatActivity {
         });
     }
 
-    private void updateIsAvailableValue(String deviceId, boolean isAvailable) {
+    private void updateIsAvailableValue(String deviceId,String userID, boolean isAvailable) {
         // Update the isAvalibele value in the Realtime Database for the selected GPS device
-        DatabaseReference deviceRef = databaseReference.child(deviceId);
-        deviceRef.child("isAvalibele").setValue(isAvailable)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // isAvalibele value updated successfully
-                        Toast.makeText(AddPatientsform.this, "Device availability updated to true", Toast.LENGTH_SHORT).show();
+//        DatabaseReference deviceRef = databaseReference.child("-NdogW6Qx7MOKy4Jjgym");
+//        deviceRef.child("isAvalibele").setValue(isAvailable)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        // isAvalibele value updated successfully
+//                        Toast.makeText(AddPatientsform.this, "Device availability updated to true", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        // Handle the error if isAvalibele value couldn't be updated
+//                        Toast.makeText(AddPatientsform.this, "Error updating device availability", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        locationRef = database.getReference("gps_tracking_devices");
+        locationRef.child(deviceId).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Retrieve the existing data
+                    LocationData locationData = dataSnapshot.getValue(LocationData.class);
+                    if (locationData != null) {
+                        // Update latitude and longitude
+
+                        locationData.setUserID(userID);
+                        locationData.setIsAvalibele(false);
+
+                        // Save the updated location data
+                        locationRef.child(deviceId).setValue(locationData);
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle the error if isAvalibele value couldn't be updated
-                        Toast.makeText(AddPatientsform.this, "Error updating device availability", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                } else {
+                    // Handle the case where there's no existing data under the user's ID
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Handle the error
+            }
+        });
     }
 
 }
