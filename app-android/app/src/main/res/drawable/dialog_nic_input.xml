@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- dialog_nic_input.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please enter NIC number"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/nicEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NIC Number"
+        android:inputType="text"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/saveNicButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Data"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

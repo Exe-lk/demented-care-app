@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".Videorecorderactivity"
+    android:orientation="vertical"
+    android:background="@drawable/main_header_selector">
+
+    <ImageView
+        android:id="@+id/videoImageView"
+        android:layout_width="match_parent"
+        android:layout_height="306dp"
+        android:src="@drawable/video_record"
+        android:visibility="visible" />
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="339dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <!-- FrameLayout to layer the buttons -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Button to record video -->
+        <Button
+            android:id="@+id/recordButton"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:background="@drawable/log_btn_background"
+            android:text="Record Video"
+            android:textColor="@color/white" />
+
+        <!-- Button layout to hold Upload and Cancel buttons -->
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/caseldBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/log_btn_background"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                app:backgroundTint="#FE4F5A" />
+
+            <Button
+                android:id="@+id/uploadBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/log_btn_background"
+                android:text="Upload"
+                android:textColor="@color/white"
+                app:backgroundTint="#09810E" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

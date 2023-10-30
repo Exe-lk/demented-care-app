@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_header_selector"
+    tools:context=".voicerecorder"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        android:orientation="vertical">
+
+        <!-- FrameLayout to contain the LottieAnimationView and the button -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- LottieAnimationView to display the animation -->
+        <ImageView
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/record_img"/>
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:orientation="vertical">
+
+        <!-- FrameLayout to contain the LottieAnimationView and the button -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/ll_time"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:maxWidth="300dp"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textSize="70sp"
+                android:textColor="#462281"/>
+
+            <TextView
+                android:id="@+id/responseStatusID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="#462281"
+                android:textSize="20sp" />
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        android:orientation="vertical">
+
+        <!-- FrameLayout to contain the LottieAnimationView and the button -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- LottieAnimationView to display the animation -->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lav_playing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="sound2"
+                app:lottie_loop="true"></com.airbnb.lottie.LottieAnimationView>
+
+            <!-- Button with a transparent background -->
+            <Button
+                android:id="@+id/playPauseButton"
+                android:layout_width="match_parent"
+                android:layout_height="204dp"
+                android:background="@android:color/transparent"
+                android:onClick="playPauseAnimation" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="172dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="60dp"
+        android:orientation="horizontal">
+
+        <!-- First Button (Submit) -->
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="158dp"
+                android:layout_height="70dp"
+                android:background="@drawable/log_btn_background"
+                android:text="Submit"
+                android:textSize="20sp"
+                app:backgroundTint="#462280"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <!-- Second Button (Play) -->
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/playBtn"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/play_button"
+                android:text="Play"
+                android:textSize="20sp"
+                app:backgroundTint="#EB5648"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
